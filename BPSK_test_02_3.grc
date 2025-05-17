@@ -173,7 +173,7 @@ blocks:
     bus_structure: null
     coordinate: [32, 416.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: analog_simple_squelch_cc_0
   id: analog_simple_squelch_cc
   parameters:
@@ -190,7 +190,7 @@ blocks:
     bus_structure: null
     coordinate: [224, 696.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_message_debug_0_0
   id: blocks_message_debug
   parameters:
@@ -226,7 +226,7 @@ blocks:
     bus_structure: null
     coordinate: [56, 208.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_pack_k_bits_bb_0_0_0
   id: blocks_pack_k_bits_bb
   parameters:
@@ -280,7 +280,7 @@ blocks:
     bus_structure: null
     coordinate: [200, 408.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_tagged_stream_mux_0
   id: blocks_tagged_stream_mux
   parameters:
@@ -314,7 +314,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [616, 608.0]
+    coordinate: [704, 848.0]
     rotation: 0
     state: enabled
 - name: digital_constellation_modulator_0
@@ -345,23 +345,21 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    mark_delay: '64'
+    mark_delay: '48'
     maxoutbuf: '0'
     minoutbuf: '0'
     sps: sps
-    symbols: "(1+0j, 1+0j, 1+0j, 1+0j, -1+0j, -1+0j, -1+0j, -1+0j,\n 1+0j, 1+0j, 1+0j,\
-      \ 1+0j, -1+0j, -1+0j, -1+0j, -1+0j,\n 1+0j, -1+0j, 1+0j, -1+0j, 1+0j, -1+0j,\
-      \ 1+0j, -1+0j,\n 1+0j, -1+0j, 1+0j, -1+0j, 1+0j, -1+0j, 1+0j, -1+0j,\n 1+0j,\
-      \ 1+0j, 1+0j, 1+0j, -1+0j, -1+0j, -1+0j, -1+0j,\n 1+0j, 1+0j, 1+0j, 1+0j, -1+0j,\
-      \ -1+0j, -1+0j, -1+0j,\n 1+0j, -1+0j, 1+0j, -1+0j, 1+0j, -1+0j, 1+0j, -1+0j,\n\
-      \ 1+0j, -1+0j, 1+0j, -1+0j, 1+0j, -1+0j, 1+0j, -1+0j)"
+    symbols: (1+0j, 1+0j, 1+0j, 1+0j, -1+0j, -1+0j, -1+0j, -1+0j, 1+0j, 1+0j, 1+0j,
+      1+0j, -1+0j, -1+0j, -1+0j, -1+0j, 1+0j, 1+0j, 1+0j, 1+0j, -1+0j, -1+0j, -1+0j,
+      -1+0j, 1+0j, -1+0j, 1+0j, -1+0j, 1+0j, -1+0j, 1+0j, -1+0j, 1+0j, -1+0j, 1+0j,
+      -1+0j, 1+0j, -1+0j, 1+0j, -1+0j, 1+0j, -1+0j, 1+0j, -1+0j)
     threshold: '0.9'
     threshold_method: digital.THRESHOLD_ABSOLUTE
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [544, 944.0]
+    coordinate: [536, 936.0]
     rotation: 0
     state: disabled
 - name: digital_correlate_access_code_xx_ts_1_0_0
@@ -564,7 +562,7 @@ blocks:
     bus_structure: null
     coordinate: [136, 336.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: pdu_tagged_stream_to_pdu_0_0
   id: pdu_tagged_stream_to_pdu
   parameters:
@@ -627,11 +625,15 @@ connections:
 - [digital_constellation_decoder_cb_0, '0', digital_correlate_access_code_xx_ts_1_0_0,
   '0']
 - [digital_constellation_modulator_0, '0', iio_pluto_sink_0, '0']
+- [digital_corr_est_cc_0, '0', digital_constellation_decoder_cb_0, '0']
 - [digital_correlate_access_code_xx_ts_1_0_0, '0', blocks_stream_to_tagged_stream_0_0,
   '0']
 - [digital_pfb_clock_sync_xxx_0, '0', digital_constellation_decoder_cb_0, '0']
+- [digital_pfb_clock_sync_xxx_0, '0', digital_corr_est_cc_0, '0']
 - [digital_protocol_formatter_bb_0, '0', blocks_tagged_stream_mux_0, '0']
 - [iio_pluto_source_0, '0', analog_simple_squelch_cc_0, '0']
+- [iio_pluto_source_0, '0', digital_pfb_clock_sync_xxx_0, '0']
+- [iio_pluto_source_0, '0', qtgui_sink_x_0, '0']
 - [pdu_pdu_to_tagged_stream_0, '0', blocks_tagged_stream_mux_0, '1']
 - [pdu_pdu_to_tagged_stream_0, '0', digital_protocol_formatter_bb_0, '0']
 - [pdu_tagged_stream_to_pdu_0_0, pdus, blocks_message_debug_0_0, print]
