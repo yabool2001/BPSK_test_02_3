@@ -14,7 +14,6 @@ from PyQt5 import Qt
 from gnuradio import qtgui
 from gnuradio import analog
 from gnuradio import blocks
-import pmt
 from gnuradio import digital
 from gnuradio import gr
 from gnuradio.filter import firdes
@@ -118,7 +117,7 @@ class BPSK_test_02_3(gr.top_block, Qt.QWidget):
         self.iio_pluto_sink_0.set_bandwidth(bw)
         self.iio_pluto_sink_0.set_frequency(f_c)
         self.iio_pluto_sink_0.set_samplerate(samp_rate)
-        self.iio_pluto_sink_0.set_attenuation(0, 1)
+        self.iio_pluto_sink_0.set_attenuation(0, 10)
         self.iio_pluto_sink_0.set_filter_params('Auto', '', 0, 0)
         self.epy_block_1_0_0_0_0 = epy_block_1_0_0_0_0.byte_logger(samp_rate=samp_rate, filename="06_byte_rx_log.csv")
         self.digital_protocol_formatter_bb_0 = digital.protocol_formatter_bb(header, "packet_len")
@@ -139,8 +138,7 @@ class BPSK_test_02_3(gr.top_block, Qt.QWidget):
         self.blocks_stream_to_tagged_stream_0_0_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, 1, "packet_len")
         self.blocks_stream_to_tagged_stream_0_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, 1, "packet_len")
         self.blocks_pack_k_bits_bb_0_0_0 = blocks.pack_k_bits_bb(8)
-        self.blocks_message_strobe_1 = blocks.message_strobe(pmt.cons ( pmt.PMT_NIL , pmt.make_u8vector ( 1 , 0x31 ) ), 1000)
-        self.analog_simple_squelch_cc_0 = analog.simple_squelch_cc((-50), (1e-4))
+        self.analog_simple_squelch_cc_0 = analog.simple_squelch_cc((-40), (1e-4))
         self.analog_const_source_x_0 = analog.sig_source_b(0, analog.GR_CONST_WAVE, 0, 0, 49)
 
 
