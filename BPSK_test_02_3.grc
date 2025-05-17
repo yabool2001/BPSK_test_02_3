@@ -38,29 +38,15 @@ blocks:
 - name: access_key
   id: variable
   parameters:
-    comment: 'HEX: F0 F0 AA AA
+    comment: 'HEX: F0 F0 F0 AA AA AA
 
-      DEC: 240 240 170 170'
-    value: '''11110000111100001010101010101010'''
+      DEC: 240 240 240 170 170 170'
+    value: '''111100001111000011110000101010101010101010101010'''
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [456, 16.0]
-    rotation: 0
-    state: enabled
-- name: access_key_2
-  id: variable
-  parameters:
-    comment: 'HEX: F0 F0 AA AA F0 F0 AA AA
-
-      DEC: 240 240 170 170 240 240 170 170'
-    value: '''1111000011110000101010101010101011110000111100001010101010101010'''
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [984, 16.0]
+    coordinate: [448, 16.0]
     rotation: 0
     state: enabled
 - name: bw
@@ -72,25 +58,27 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [904, 16.0]
+    coordinate: [760, 16.0]
     rotation: 0
     state: enabled
 - name: f_c
   id: variable
   parameters:
     comment: ''
-    value: '1576000000'
+    value: '2400000000'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [616, 16.0]
+    coordinate: [832, 16.0]
     rotation: 0
     state: enabled
 - name: header
   id: variable
   parameters:
-    comment: ''
+    comment: 'digital.header_format_default
+
+      ( access_key , 0 )'
     value: digital.header_format_default ( access_key , 0 )
   states:
     bus_sink: false
@@ -116,7 +104,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [768, 176.0]
+    coordinate: [744, 200.0]
     rotation: 0
     state: enabled
 - name: nfilts
@@ -128,7 +116,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [840, 16.0]
+    coordinate: [696, 16.0]
     rotation: 0
     state: enabled
 - name: samp_rate
@@ -147,12 +135,12 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '8'
+    value: '4'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [776, 16.0]
+    coordinate: [632, 16.0]
     rotation: 0
     state: enabled
 - name: taps
@@ -166,7 +154,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [400, 504.0]
+    coordinate: [392, 512.0]
     rotation: 0
     state: enabled
 - name: analog_const_source_x_0
@@ -200,7 +188,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [208, 648.0]
+    coordinate: [224, 696.0]
     rotation: 0
     state: enabled
 - name: blocks_message_debug_0_0
@@ -271,7 +259,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [832, 680.0]
+    coordinate: [864, 600.0]
     rotation: 0
     state: enabled
 - name: blocks_stream_to_tagged_stream_0_0_0
@@ -348,7 +336,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [768, 264.0]
+    coordinate: [736, 288.0]
     rotation: 0
     state: enabled
 - name: digital_corr_est_cc_0
@@ -382,7 +370,7 @@ blocks:
     access_code: access_key
     affinity: ''
     alias: ''
-    comment: Correlates with access code to extract the payload.
+    comment: access_key
     maxoutbuf: '0'
     minoutbuf: '0'
     tagname: '"packet_len"'
@@ -392,7 +380,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [592, 760.0]
+    coordinate: [688, 696.0]
     rotation: 0
     state: enabled
 - name: digital_pfb_clock_sync_xxx_0
@@ -423,7 +411,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    comment: ''
+    comment: header
     format: header
     len_tag_key: '"packet_len"'
     maxoutbuf: '0'
@@ -432,7 +420,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [320, 200.0]
+    coordinate: [288, 208.0]
     rotation: 0
     state: enabled
 - name: epy_block_1_0_0_0
@@ -466,8 +454,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [704.0, 24]
-    rotation: 90
+    coordinate: [736, 128.0]
+    rotation: 0
     state: disabled
 - name: epy_block_1_0_0_0_0
   id: epy_block
@@ -500,8 +488,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1160.0, 480]
-    rotation: 90
+    coordinate: [1144, 624.0]
+    rotation: 0
     state: enabled
 - name: iio_pluto_sink_0
   id: iio_pluto_sink
@@ -526,7 +514,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [992, 232.0]
+    coordinate: [960, 272.0]
     rotation: 0
     state: enabled
 - name: iio_pluto_source_0
@@ -574,7 +562,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [200, 304.0]
+    coordinate: [136, 336.0]
     rotation: 0
     state: disabled
 - name: pdu_tagged_stream_to_pdu_0_0
@@ -620,7 +608,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [288, 832.0]
+    coordinate: [392, 768.0]
     rotation: 0
     state: enabled
 
