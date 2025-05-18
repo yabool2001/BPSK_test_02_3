@@ -5,3 +5,6 @@ Add "Simple Squelch" block to detect signal presence before feeding "Polyphase C
 
 Release v02.3.1
 ![image](https://github.com/user-attachments/assets/3f9eee70-811e-41be-9d43-877b2dcbb078)
+
+Hardware setup
+![hardware_setup](https://github.com/user-attachments/assets/ba9aad68-24dc-4898-84e9-f6a3ea190634)
