@@ -188,7 +188,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [224, 696.0]
+    coordinate: [224, 592.0]
     rotation: 0
     state: disabled
 - name: blocks_message_debug_0_0
@@ -339,29 +339,6 @@ blocks:
     coordinate: [736, 288.0]
     rotation: 0
     state: enabled
-- name: digital_corr_est_cc_0
-  id: digital_corr_est_cc
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    mark_delay: '48'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    sps: sps
-    symbols: (1+0j, 1+0j, 1+0j, 1+0j, -1+0j, -1+0j, -1+0j, -1+0j, 1+0j, 1+0j, 1+0j,
-      1+0j, -1+0j, -1+0j, -1+0j, -1+0j, 1+0j, 1+0j, 1+0j, 1+0j, -1+0j, -1+0j, -1+0j,
-      -1+0j, 1+0j, -1+0j, 1+0j, -1+0j, 1+0j, -1+0j, 1+0j, -1+0j, 1+0j, -1+0j, 1+0j,
-      -1+0j, 1+0j, -1+0j, 1+0j, -1+0j, 1+0j, -1+0j, 1+0j, -1+0j)
-    threshold: '0.9'
-    threshold_method: digital.THRESHOLD_ABSOLUTE
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [536, 936.0]
-    rotation: 0
-    state: disabled
 - name: digital_correlate_access_code_xx_ts_1_0_0
   id: digital_correlate_access_code_xx_ts
   parameters:
@@ -625,11 +602,9 @@ connections:
 - [digital_constellation_decoder_cb_0, '0', digital_correlate_access_code_xx_ts_1_0_0,
   '0']
 - [digital_constellation_modulator_0, '0', iio_pluto_sink_0, '0']
-- [digital_corr_est_cc_0, '0', digital_constellation_decoder_cb_0, '0']
 - [digital_correlate_access_code_xx_ts_1_0_0, '0', blocks_stream_to_tagged_stream_0_0,
   '0']
 - [digital_pfb_clock_sync_xxx_0, '0', digital_constellation_decoder_cb_0, '0']
-- [digital_pfb_clock_sync_xxx_0, '0', digital_corr_est_cc_0, '0']
 - [digital_protocol_formatter_bb_0, '0', blocks_tagged_stream_mux_0, '0']
 - [iio_pluto_source_0, '0', analog_simple_squelch_cc_0, '0']
 - [iio_pluto_source_0, '0', digital_pfb_clock_sync_xxx_0, '0']
