@@ -188,7 +188,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [224, 592.0]
+    coordinate: [208, 584.0]
     rotation: 0
     state: disabled
 - name: blocks_message_debug_0_0
@@ -205,7 +205,7 @@ blocks:
     bus_structure: null
     coordinate: [1104, 880.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_message_strobe_1
   id: blocks_message_strobe
   parameters:
@@ -396,6 +396,46 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [288, 208.0]
+    rotation: 0
+    state: enabled
+- name: epy_block_0_0
+  id: epy_block
+  parameters:
+    _source_code: "from gnuradio import gr\nimport numpy as np\nimport time\nimport\
+      \ os\n\nclass complex_sps_file_sink(gr.sync_block):\n    def __init__(self,\
+      \ samp_rate=32000, sps=2, filename=\"complex_log.csv\"):\n        gr.sync_block.__init__(self,\n\
+      \            name=\"Complex Sps File Sink\",\n            in_sig=[np.complex64],\n\
+      \            out_sig=None)\n        self.filename = filename\n        self.samp_rate\
+      \ = samp_rate\n        self.sps = sps\n        self.start_time = time.time()\n\
+      \        self.sample_index = 0  # licznik pr\xF3bek\n\n        file_exists =\
+      \ os.path.isfile(filename)\n        self.f = open(filename, \"w\", encoding=\"\
+      utf-8\")\n\n        if not file_exists or os.stat(filename).st_size == 0:\n\
+      \            self.f.write(\"timestamp;real;imag;symbol_index;samp_rate\\n\"\
+      )\n\n    def work(self, input_items, output_items):\n        elapsed = time.time()\
+      \ - self.start_time\n        for c in input_items[0]:\n            timestamp\
+      \ = elapsed\n            ts = f\"{timestamp:.6f}\".replace('.', ',')\n     \
+      \       re = f\"{c.real:.6f}\".replace('.', ',')\n            im = f\"{c.imag:.6f}\"\
+      .replace('.', ',')\n            symbol_idx = str(self.sample_index // self.sps)\n\
+      \            sr = f\"{self.samp_rate:.0f}\".replace('.', ',')\n\n          \
+      \  self.f.write(f\"{ts};{re};{im};{symbol_idx};{sr}\\n\")\n\n            elapsed\
+      \ += 1 / self.samp_rate\n            self.sample_index += 1\n\n        self.f.flush()\n\
+      \        return len(input_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: ''
+    filename: '"01_complex_tx_bpsk_mod_log.csv"'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    sps: sps
+  states:
+    _io_cache: ('Complex Sps File Sink', 'complex_sps_file_sink', [('samp_rate', '32000'),
+      ('sps', '2'), ('filename', "'complex_log.csv'")], [('0', 'complex', 1)], [],
+      '', ['filename', 'samp_rate', 'sps'])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [960, 168.0]
     rotation: 0
     state: enabled
 - name: epy_block_1_0_0_0
@@ -590,7 +630,6 @@ blocks:
 connections:
 - [analog_const_source_x_0, '0', blocks_stream_to_tagged_stream_0_0_0, '0']
 - [analog_simple_squelch_cc_0, '0', digital_pfb_clock_sync_xxx_0, '0']
-- [analog_simple_squelch_cc_0, '0', qtgui_sink_x_0, '0']
 - [blocks_message_strobe_1, strobe, pdu_pdu_to_tagged_stream_0, pdus]
 - [blocks_pack_k_bits_bb_0_0_0, '0', epy_block_1_0_0_0_0, '0']
 - [blocks_pack_k_bits_bb_0_0_0, '0', pdu_tagged_stream_to_pdu_0_0, '0']
@@ -601,6 +640,7 @@ connections:
 - [blocks_tagged_stream_mux_0, '0', epy_block_1_0_0_0, '0']
 - [digital_constellation_decoder_cb_0, '0', digital_correlate_access_code_xx_ts_1_0_0,
   '0']
+- [digital_constellation_modulator_0, '0', epy_block_0_0, '0']
 - [digital_constellation_modulator_0, '0', iio_pluto_sink_0, '0']
 - [digital_correlate_access_code_xx_ts_1_0_0, '0', blocks_stream_to_tagged_stream_0_0,
   '0']
